@@ -1,0 +1,260 @@
+.app {
+  max-width: 500px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  font-family: 'Arial', sans-serif;
+}
+
+
+header {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+h1 {
+  font-size: 2.5rem;
+  color: #333;
+  margin: 0;
+}
+
+/* Стили для игровой доски */
+.game-board {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin-bottom: 20px;
+}
+
+.word-row {
+  display: flex;
+  gap: 5px;
+}
+
+.letter-box {
+  width: 60px;
+  height: 60px;
+  border: 2px solid #d3d6da;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  transition: all 0.2s;
+}
+
+/* Стили для клеток в зависимости от результата */
+.letter-box.correct {
+  background-color: #6aaa64;
+  color: white;
+  border-color: #6aaa64;
+}
+
+.letter-box.present {
+  background-color: #c9b458;
+  color: white;
+  border-color: #c9b458;
+}
+
+.letter-box.absent {
+  background-color: #787c7e;
+  color: rgb(17, 113, 129);
+  border-color: #787c7e;
+}
+
+/* Анимации для клеток */
+@keyframes successPulse {
+  0%, 100% {
+    transform: scale(1);
+    filter: brightness(100%);
+  }
+  50% {
+    transform: scale(1.1);
+    filter: brightness(150%) drop-shadow(0 0 5px rgb(128, 255, 128));
+  }
+}
+
+@keyframes errorFadeOut {
+  0% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0.5;
+    transform: scale(0.9);
+  }
+}
+
+/* Применение анимаций */
+.animate-success {
+  animation: successPulse 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.animate-error {
+  animation: errorFadeOut 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Стили для текущего ввода */
+.word-row.current .letter-box {
+  border-color: #878a8c;
+}
+
+/* Стили для сообщений */
+.message {
+  margin: 15px 0;
+  padding: 10px 15px;
+  background-color: #f8f9fa;
+  border-radius: 5px;
+  font-weight: bold;
+  text-align: center;
+  min-height: 40px;
+  width: 100%;
+}
+
+/* Стили для кнопки новой игры */
+.new-game-btn {
+  padding: 10px 20px;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: background-color 0.3s;
+}
+
+.new-game-btn:hover {
+  background-color: #45a049;
+}
+
+/* Стили для подсказки по клавиатуре */
+.keyboard-hint {
+  margin-top: 20px;
+  text-align: center;
+  font-size: 0.9rem;
+  color: #666;
+}
+
+kbd {
+  background-color: #f1f1f1;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  box-shadow: 0 1px 0 rgba(0,0,0,0.2);
+  color: #333;
+  display: inline-block;
+  font-size: 0.85rem;
+  padding: 2px 6px;
+  margin: 0 2px;
+}
+
+/* Анимации для клеток */
+@keyframes pop {
+  0% { transform: scale(0.8); opacity: 0; }
+  40% { transform: scale(1.1); }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.letter-box:not(:empty) {
+  animation: pop 0.25s ease-in-out;
+}
+
+/* Адаптивность для мобильных устройств */
+@media (max-width: 500px) {
+  .letter-box {
+    width: 50px;
+    height: 50px;
+    font-size: 1.5rem;
+  }
+}
+
+@media (max-width: 400px) {
+  .letter-box {
+    width: 40px;
+    height: 40px;
+    font-size: 1.2rem;
+  }
+}
+
+
+
+
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  font-family: 'Arial', 'Helvetica', sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  background-color: #ffffff;
+  color: #333;
+}
+
+body {
+  margin: 0;
+  padding: 20px;
+  min-height: 100vh;
+}
+
+#root {
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  outline: none;
+}
+
+button:focus {
+  outline: 2px solid #4caf50;
+}
+
+/* Анимации для клеток */
+@keyframes pop {
+  0% {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  40% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.letter-box:not(:empty) {
+  animation: pop 0.25s ease-in-out;
+}
+
+/* Анимация для сообщений */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.message {
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+/* Плавные переходы для всех элементов */
+* {
+  transition: background-color 0.3s, color 0.3s, border-color 0.3s, transform 0.3s;
+}
